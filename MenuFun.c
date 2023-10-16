@@ -75,8 +75,7 @@ int autogetch(int ex){
 	#endif
 	/*
 		this function returns an integer between -1 and 5
-	-1			0	1		2		3		4		5
-	Nothing		Up	Down	Right	Left	Select	Back
+	-1 == Nothing,	0 == Up, 1 == Down, 2 == Right, 3 == Left, 4 == Select, 5 == Back
 	*/
 	return (c>=0&&c<=5)?c:-1;
 }
