@@ -3,18 +3,18 @@
 #include <string.h>
 
 #ifdef _WIN32
-//si es windows
+//if its Windows
 	#include <conio.h>
 #elif __unix__
-//si es linux
+//if its linux
 	#include <termios.h>
 	#include <unistd.h>
 #endif
 /*
-modo (ex)
-0 == flechas
-1 == flechas + seleccionar + volver
-2 == flechas + seleccionar + volver + wasd + numeros
+mode ("ex" parameter)
+0 == arrows
+1 == arrows + select + back
+2 == arrows + select + back + wasd + numbers
 3 == passtrought only numbers and letters
 4 == passtrought all
 */
@@ -74,14 +74,14 @@ int autogetch(int ex){
 		tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
 	#endif
 	/*
-		esta funcion retorna un valor entero entre -1 y 5
-	-1		0		1		2		3			4			5
-	nada	Arriba	Abajo	Derecha	Izquierda	Seleccion	volver
+		this function returns an integer between -1 and 5
+	-1			0	1		2		3		4		5
+	Nothing		Up	Down	Right	Left	Select	Back
 	*/
 	return (c>=0&&c<=5)?c:-1;
 }
 
-void pausefn(){//funcion de pausa multiplataforma
+void pausefn(){//pause function for multiplatform
 	#ifdef _WIN32
 		system("pause");
 	#elif __unix__ 
@@ -97,7 +97,7 @@ void pausefn(){//funcion de pausa multiplataforma
     #endif
 }
 
-void clsfn(){//funcion de limpiar pantalla multiplataforma
+void clsfn(){//clean screen function for multiplatform
 	#ifdef _WIN32
 		system("cls");
 	#elif __unix__ 
@@ -149,14 +149,14 @@ int menulogic(int *nmr,int *sel){
 	int infl;
 	while(1){
 	infl = autogetch(2);
-		if(infl==0){//arriba
+		if(infl==0){//up
 			if(*sel<=0){
 				*sel=*nmr;
 			}else{
 				*sel-=1;
 			}
 			break;
-		}else if(infl==1){//abajo
+		}else if(infl==1){//down
 			if(*sel>=*nmr){
 				*sel=0;
 			}else{
@@ -164,11 +164,11 @@ int menulogic(int *nmr,int *sel){
 			}
 			break;
 		}else if(infl==4){
-			//cerrar menu por seleccion
+			//closes cause' selection
 			return 0;
 		}
 	}
-	//continuar
+	//continue
 	return 1;
 }
 
